@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Softgames.Common;
+using TMPro;
 
 namespace Softgames.AceOfShadows
 {
@@ -24,6 +25,8 @@ namespace Softgames.AceOfShadows
         private Transform cardsSpawnPos,targetPosition;
         [SerializeField]
         private GameObject startBtn, stopBtn;
+        [SerializeField]
+        private TextMeshProUGUI cardCountTxt;
 
         private List<AceOfShadows_Card> cardsStack;
 
@@ -83,6 +86,7 @@ namespace Softgames.AceOfShadows
                 cardsStack[i].transform.SetParent(targetPosition);
                 cardsStack[i].transform.SetAsLastSibling();
                 yield return new WaitForSeconds(cardsDrawSpeed);
+                cardCountTxt.text = "Card Count\n" + cardReaeachedIndex.ToString();
             }
         }
     }
