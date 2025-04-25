@@ -975,6 +975,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4481e766769a18c45ab9c856a07eedd0, type: 2}
   - {fileID: 11400000, guid: ca0de7d586f9b0f4c8bafc4d35e9bd2b, type: 2}
   - {fileID: 11400000, guid: 3a5ad8400a9b48847872c92b1cda180b, type: 2}
+  - {fileID: 11400000, guid: 2f4e953e695f63a4f8fca23d7a7178a1, type: 2}
+  - {fileID: 11400000, guid: e295cead2998b5446b4a542303d812a0, type: 2}
+  - {fileID: 11400000, guid: b3c8df4b9f40dd540bde094e9b429dff, type: 2}
+  - {fileID: 11400000, guid: 48ea1eb50e6b28f4cbf73f3a08747823, type: 2}
+  - {fileID: 11400000, guid: 5920a5725afe6ca46b41adb41f604565, type: 2}
+  - {fileID: 11400000, guid: 8634daeb31e74684a97c0bd4f4594221, type: 2}
+  - {fileID: 11400000, guid: dd4ba15396d7efa4d8e78b7c02c5718d, type: 2}
+  - {fileID: 11400000, guid: ec598d7b2665905459001bc4a92c904d, type: 2}
+  - {fileID: 11400000, guid: 774481374f3c69144bee7a5c75cfa8f9, type: 2}
+  - {fileID: 11400000, guid: 2c6b2142fdb78404593bb34f66ef797e, type: 2}
+  - {fileID: 11400000, guid: eef2f7fafee09464f981ab95105d5701, type: 2}
+  - {fileID: 11400000, guid: aa76b9a1aa0f66642abe0ba94c093792, type: 2}
+  - {fileID: 11400000, guid: 5b1ae9a8b74c3af4c8fff79e944220c9, type: 2}
+  - {fileID: 11400000, guid: 49bc35e7a565f574db7a4b6142a17951, type: 2}
+  - {fileID: 11400000, guid: 8e7a783babb846340923ba05f8deb443, type: 2}
+  - {fileID: 11400000, guid: 971aab16b02069b488663999a5cc4c56, type: 2}
+  - {fileID: 11400000, guid: e6c08933d7ecab14bbec401d35c78261, type: 2}
+  - {fileID: 11400000, guid: b79d1fb71c1bff7449859a8b56cbfd71, type: 2}
+  - {fileID: 11400000, guid: 11bba55fd6b19d946b8007be1bbe5f54, type: 2}
+  - {fileID: 11400000, guid: b51acd286d565e642a29cb8c4e4e1f1c, type: 2}
+  - {fileID: 11400000, guid: 4f187a9835922bb4fb228f0652c764ac, type: 2}
+  - {fileID: 11400000, guid: cd57046f0a44eb74e8fd1619c707e3d8, type: 2}
+  - {fileID: 11400000, guid: 6adb1ae71ceb8ff49960061132a4dadc, type: 2}
+  - {fileID: 11400000, guid: 8e50f76ad14bdbd478ab3fc1232555cd, type: 2}
   cardPrefab: {fileID: 1023518173601439315, guid: 661761db98486254782855b2e27f499c, type: 3}
   cardsSpawnPos: {fileID: 347869422}
   targetPosition: {fileID: 1016707184}
