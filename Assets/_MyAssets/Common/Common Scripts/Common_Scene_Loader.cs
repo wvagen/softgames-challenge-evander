@@ -11,7 +11,6 @@ namespace Softgames.Common
         [SerializeField] private GameObject _LoadingContainer;
         [SerializeField] private GameObject _loadingPanel;
 
-        [SerializeField] private GameObject _sliderLoading;
         [SerializeField] private Slider _fill;
 
         private bool isPressed = false;
@@ -51,6 +50,7 @@ namespace Softgames.Common
         private void Slide_Upwards_Anim()
         {
             _LoadingContainer.LeanMoveLocalY(380, .75f).setEaseOutBack();
+            _LoadingContainer.SetActive(false);
         }
 
         private void Scale_Logo_Anim()
@@ -67,25 +67,24 @@ namespace Softgames.Common
 
         private IEnumerator Load_Scene(string sceneName_Path)
         {
+            _LoadingContainer.SetActive(true);
+            Drop_Down_Anim();
             yield return new WaitForSeconds(.6f);
-            _sliderLoading.SetActive(true);
-            if (_sliderLoading.activeInHierarchy)
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName_Path);
+            asyncOperation.allowSceneActivation = false;
+
+            while (!asyncOperation.isDone)
             {
-                AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName_Path);
-                asyncOperation.allowSceneActivation = false;
+                _fill.value = Mathf.Lerp(_fill.value, asyncOperation.progress, 2 * Time.deltaTime);
 
-                while (!asyncOperation.isDone)
+                if (asyncOperation.progress >= 0.9f)
                 {
-                    _fill.value = Mathf.Lerp(_fill.value, asyncOperation.progress, 2 * Time.deltaTime);
-
-                    if (asyncOperation.progress >= 0.9f)
-                    {
-                        _fill.value = 1f;
-                        asyncOperation.allowSceneActivation = true;
-                    }
-                    yield return null;
+                    _fill.value = 1f;
+                    asyncOperation.allowSceneActivation = true;
                 }
+                yield return null;
             }
+            Slide_Upwards_Anim();
         }
     }
 

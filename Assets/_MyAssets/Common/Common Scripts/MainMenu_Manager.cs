@@ -9,15 +9,15 @@ namespace Softgames.Common
 
         public void LoadAceOfShadowsProject()
         {
-
+            sceneLoader.LoadScene(Constants.SCENE_ACE_OF_SHADOWS);
         }
         public void LoadMagicOfWordsProject()
         {
-
+            sceneLoader.LoadScene(Constants.SCENE_MAGIC_WORDS);
         }
         public void LoadPhoenixProject()
         {
-
+            sceneLoader.LoadScene(Constants.SCENE_PHOENIX_FLAME);
         }
     }
 }
