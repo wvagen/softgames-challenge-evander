@@ -7,6 +7,6 @@ namespace Softgames.AceOfShadows
     {
         public string cardName;
         public Sprite cardSprite;
-
+        public Sprite cardBG;
     }
 }

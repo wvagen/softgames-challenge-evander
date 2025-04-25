@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a8b1e6285ca48144bad36bf61d01eb3, type: 3}
-  m_Name: Evander
+  m_Name: 6
   m_EditorClassIdentifier: 
-  cardName: Evander
+  cardName: 6
   cardSprite: {fileID: 21300000, guid: 69d40cc7b32d8489da69a3eccb69f7db, type: 3}
   cardBG: {fileID: 21300000, guid: 7a68a4faa81064e6c8ca27a8f6673baf, type: 3}

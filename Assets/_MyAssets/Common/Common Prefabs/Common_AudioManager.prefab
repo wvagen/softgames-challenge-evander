@@ -57,3 +57,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: drawCardSFX
+    clip: {fileID: 8300000, guid: 207bd302b7c386b429d9c4c38e0b61c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
