@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Softgames.MagicWords
 {
@@ -19,6 +20,7 @@ namespace Softgames.MagicWords
             charInitPos.x = isRight ? Mathf.Abs(charInitPos.x) : charInitPos.x;
             characterBubble.anchoredPosition3D = charInitPos;
 
+
             for (int i = 0; i < chatFragments.Count; i++)
             {
                 if (string.IsNullOrEmpty(chatFragments[i].Text))
@@ -33,6 +35,15 @@ namespace Softgames.MagicWords
                 }
             }
             chatContainer.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
+            StartCoroutine(ContainerFitFixer());
+        }
+
+        IEnumerator ContainerFitFixer()
+        {
+            yield return new WaitForEndOfFrame();
+            chatContainer.gameObject.SetActive(false);//This is to adjust the chat container with the Unity Frame Calculation
+            yield return new WaitForEndOfFrame();
+            chatContainer.gameObject.SetActive(true);
         }
     }
 }
