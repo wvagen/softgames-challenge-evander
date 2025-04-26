@@ -17,11 +17,6 @@ namespace Softgames.Common
         float actualTime = 0;
         float fps;
 
-        void Start()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
         // Update is called once per frame
         void Update()
         {
