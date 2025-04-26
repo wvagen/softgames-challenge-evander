@@ -11,6 +11,9 @@ namespace Softgames.Common
         [SerializeField]
         private float refreshTime = 2f; //Refresh to display the FPS for every how many seconds
 
+        [SerializeField]
+        private Animator myAnim;
+
         float actualTime = 0;
         float fps;
 
@@ -47,7 +50,11 @@ namespace Softgames.Common
                 }
 
             }
+        }
 
+        public void Loading(bool isLoading)
+        {
+            myAnim.SetBool(Constants.ANIM_PARAM_LOADING, isLoading);
 
         }
     }
