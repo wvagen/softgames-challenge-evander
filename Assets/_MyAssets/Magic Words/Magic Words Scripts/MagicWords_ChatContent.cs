@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 namespace Softgames.MagicWords
 {
@@ -9,13 +10,15 @@ namespace Softgames.MagicWords
     {
         [SerializeField] private RectTransform characterBubble;
         [SerializeField] private Image bubbleChatCharacterImg;
+        [SerializeField] private TextMeshProUGUI bubbleChatCharacterTxt;
         [SerializeField] private GameObject textChatFragment;
         [SerializeField] private GameObject spriteChatFragment;
         [SerializeField] private Transform chatContainer;
 
-        public void SetMe(bool isRight, Sprite avatarImg, List<MagicWords_ChatFragment> chatFragments)
+        public void SetMe(bool isRight, Sprite avatarImg,string avatarName, List<MagicWords_ChatFragment> chatFragments)
         {
             bubbleChatCharacterImg.sprite = avatarImg;
+            bubbleChatCharacterTxt.text = avatarName;
             Vector3 charInitPos = characterBubble.anchoredPosition3D;
             charInitPos.x = isRight ? Mathf.Abs(charInitPos.x) : charInitPos.x;
             characterBubble.anchoredPosition3D = charInitPos;

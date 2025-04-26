@@ -15,10 +15,7 @@ namespace Softgames.MagicWords
             {
                 var responseString = await client.GetStringAsync(Constants.API_URL_CHAT);
                 Debug.Log(responseString);
-                MagicWords_Chat_Model newChatModel = new MagicWords_Chat_Model();
-                newChatModel = newChatModel.FromJson(responseString);
-
-                return newChatModel;
+                return MagicWords_Chat_Model.FromJson(responseString);
             }
             catch (Exception e)
             {

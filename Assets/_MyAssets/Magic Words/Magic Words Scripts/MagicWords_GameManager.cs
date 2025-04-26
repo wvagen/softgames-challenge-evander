@@ -3,6 +3,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
+using UnityEngine.Networking;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 namespace Softgames.MagicWords
 {
@@ -12,43 +17,110 @@ namespace Softgames.MagicWords
         [SerializeField] private GameObject conversationGO;
         [SerializeField] private Transform conversationPos;
 
-
+        [SerializeField] private GameObject skipBtn;
+        [SerializeField] private GameObject startBtn, startOverBtn;
 
         //For testing purposes
         [Header("Testing purposes")]
         public Sprite charImg;
         public List<Sprite> emojies;
-        public string textChat;
         private List<MagicWords_ChatFragment> randomCon;
 
         //End of variables testing purposes
 
-        Dictionary<string, Sprite> chatEmojies = new Dictionary<string, Sprite>(); // 0: sad , 1:intrigued , 
+        Dictionary<string, Sprite> chatEmojies = new Dictionary<string, Sprite>(); 
+        Dictionary<string, AvatarProps> avatars = new Dictionary<string, AvatarProps>();
+        int indexConv = 0;
 
-        bool canStartOver = false;
+        public Sprite defaultCharacterImg;
+
+        public class AvatarProps
+        {
+            public Sprite img { get; set; }
+            public string name { get; set; }
+            public bool isRight { get; set; }
+        }
+
         MagicWords_Chat_Model chatModel;
         public async void StartBtn()
         {
-            canStartOver = !canStartOver;
-            //common_UI.Loading(canStartOver);
-            //chatModel = await MagicWords_Chat_Controller.GetChat();
-            //Debug.Log(chatModel.Dialogues[0].Name);
-            SpawnConversation();
+            CleanChat();
+            startOverBtn.SetActive(true);
+            startBtn.SetActive(false);
+            common_UI.Loading(true);
+            chatModel = await MagicWords_Chat_Controller.GetChat();
+            indexConv = 0;
+            StartCoroutine(ExtractChatContent());
         }
 
-        public void SpawnConversation()
+        public void SpawnConversation(int convIndex)
         {
             MagicWords_ChatContent chatContent = Instantiate(conversationGO, conversationPos).GetComponent<MagicWords_ChatContent>();
-            randomCon = ChatToChunks(textChat);
-            chatContent.SetMe(false, charImg, randomCon);
+            randomCon = ChatToChunks(chatModel.dialogue[convIndex].Text);
+            if (avatars.ContainsKey(chatModel.dialogue[convIndex].Name))
+            {
+                chatContent.SetMe(avatars[chatModel.dialogue[convIndex].Name].isRight, avatars[chatModel.dialogue[convIndex].Name].img, avatars[chatModel.dialogue[convIndex].Name].name, randomCon);
+            }
+            else
+            {
+                chatContent.SetMe(false, defaultCharacterImg, chatModel.dialogue[convIndex].Name, randomCon);
+            }
         }
+
+        IEnumerator ExtractChatContent()
+        {
+            for (int i = 0; i < chatModel.emojies.Count; i++)
+            {
+                UnityWebRequest www = UnityWebRequestTexture.GetTexture(chatModel.emojies[i].Url);
+                yield return www.SendWebRequest();
+                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+
+                Sprite newSprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height), new Vector2(.5f, .5f));
+                chatEmojies[chatModel.emojies[i].Name] = newSprite;
+            }
+
+            for (int i = 0; i < chatModel.avatars.Count; i++)
+            {
+                UnityWebRequest www = UnityWebRequestTexture.GetTexture(chatModel.avatars[i].Url);
+                yield return www.SendWebRequest();
+                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+
+                Sprite newSprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height), new Vector2(.5f, .5f));
+                AvatarProps avatarProps = new AvatarProps();
+                avatarProps.name = chatModel.avatars[i].Name;
+                avatarProps.isRight = chatModel.avatars[i].Position.ToLower() == "right";
+                avatarProps.img = newSprite;
+                avatars[chatModel.avatars[i].Name] = avatarProps;
+            }
+
+            skipBtn.SetActive(true);
+            common_UI.Loading(false);
+            SkipBtn();
+        }
+
+        public void SkipBtn()
+        {
+            CleanChat();
+            SpawnConversation(indexConv);
+            indexConv++;
+            if (indexConv >= chatModel.dialogue.Count)
+            {
+                skipBtn.SetActive(false);
+            }
+        }
+
+        void CleanChat()
+        {
+            for (int i = 0; i < conversationPos.childCount; i++)
+            {
+                Destroy(conversationPos.transform.GetChild(i).gameObject);
+            }
+        }
+
 
         List<MagicWords_ChatFragment> ChatToChunks(string text)
         {
             List<MagicWords_ChatFragment> chatChunks = new List<MagicWords_ChatFragment>();
-            chatEmojies["affirmative"] = emojies[0];
-            chatEmojies["intrigued"] = emojies[1];
-            chatEmojies["neutral"] = emojies[2];
             bool isEmojiFound = false;
 
             foreach (KeyValuePair<string, Sprite> entry in chatEmojies)
