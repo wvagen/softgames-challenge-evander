@@ -49,6 +49,16 @@ namespace Softgames.Common
             s.source.Play();
         }
 
+        public void Stop_Sfx(string name)
+        {
+            CustomSounds s = Array.Find(_sounds, sound => sound.name == name);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound " + name + " not Found!");
+            }
+            s.source.Stop();
+        }
+
         public void Mute_Sfx(bool m)
         {
             foreach (CustomSounds s in _sounds)

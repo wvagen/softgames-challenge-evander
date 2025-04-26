@@ -6,4 +6,8 @@ public class Constants
     public const string SCENE_MAGIC_WORDS = "";
     public const string SCENE_PHOENIX_FLAME = "";
     #endregion
+
+    #region Animations
+    public const string ANIM_PARAM_FLAME = "isFlaming";
+    #endregion
 }

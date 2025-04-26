@@ -63,3 +63,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: fireSFX
+    clip: {fileID: 8300000, guid: 0b4517211a3414c4381b99a7fcadf885, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
