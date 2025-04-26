@@ -3,8 +3,9 @@ public class Constants
 {
     #region Scenes
     public const string SCENE_ACE_OF_SHADOWS = "Ace Of Shadows Scene";
-    public const string SCENE_MAGIC_WORDS = "";
-    public const string SCENE_PHOENIX_FLAME = "";
+    public const string SCENE_MAGIC_WORDS = "Magic Words Scene";
+    public const string SCENE_PHOENIX_FLAME = "Phoenix Flame Scene";
+    public const string SCENE_HOME = "Main Menu";
     #endregion
 
     #region Animations

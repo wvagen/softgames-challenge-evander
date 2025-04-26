@@ -13,7 +13,7 @@ namespace Softgames.MagicWords
 {
     public class MagicWords_GameManager : MonoBehaviour
     {
-        [SerializeField] private Common_UI common_UI;
+       
         [SerializeField] private GameObject conversationGO;
         [SerializeField] private Transform conversationPos;
 
@@ -25,6 +25,8 @@ namespace Softgames.MagicWords
         public Sprite charImg;
         public List<Sprite> emojies;
         private List<MagicWords_ChatFragment> randomCon;
+
+        private Common_UI common_UI;
 
         //End of variables testing purposes
 
@@ -42,6 +44,12 @@ namespace Softgames.MagicWords
         }
 
         MagicWords_Chat_Model chatModel;
+
+        private void Start()
+        {
+            common_UI = FindFirstObjectByType<Common_UI>(); // I know its not recommended just because the deadline
+        }
+
         public async void StartBtn()
         {
             CleanChat();

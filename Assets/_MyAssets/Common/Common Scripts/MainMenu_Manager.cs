@@ -4,8 +4,12 @@ namespace Softgames.Common
 {
     public class MainMenu_Manager : MonoBehaviour
     {
-        [SerializeField]
         private Common_Scene_Loader sceneLoader;
+
+        private void Start()
+        {
+            sceneLoader = FindFirstObjectByType<Common_Scene_Loader>();
+        }
 
         public void LoadAceOfShadowsProject()
         {
@@ -18,6 +22,11 @@ namespace Softgames.Common
         public void LoadPhoenixProject()
         {
             sceneLoader.LoadScene(Constants.SCENE_PHOENIX_FLAME);
+        }
+
+        public void HomeBtn()
+        {
+            sceneLoader.LoadScene(Constants.SCENE_HOME);
         }
     }
 }
