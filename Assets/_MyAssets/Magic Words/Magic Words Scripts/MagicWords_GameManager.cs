@@ -56,7 +56,7 @@ namespace Softgames.MagicWords
             startOverBtn.SetActive(true);
             startBtn.SetActive(false);
             common_UI.Loading(true);
-            chatModel = await MagicWords_Chat_Controller.GetChat();
+            //chatModel = await MagicWords_Chat_Controller.GetChat(); // This doesnt work on WebGL
             indexConv = 0;
             StartCoroutine(ExtractChatContent());
         }
@@ -77,6 +77,14 @@ namespace Softgames.MagicWords
 
         IEnumerator ExtractChatContent()
         {
+            //This is not very clean but because the async  made some problems with the WEBGL build
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(Constants.API_URL_CHAT))
+            {
+                yield return webRequest.SendWebRequest();
+
+                chatModel = MagicWords_Chat_Model.FromJson(webRequest.downloadHandler.text);
+            }
+
             for (int i = 0; i < chatModel.emojies.Count; i++)
             {
                 UnityWebRequest www = UnityWebRequestTexture.GetTexture(chatModel.emojies[i].Url);
